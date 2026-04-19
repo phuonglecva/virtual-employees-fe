@@ -1,0 +1,243 @@
+import type { Agent } from "../agents/types";
+import type { Meeting, Message } from "../meetings/types";
+import { FOUNDER_NAME } from "@/lib/constants";
+
+export const seedAgents: Agent[] = [
+  {
+    id: "agent-strategy",
+    name: "Ava Strategy",
+    role: "Strategy Lead",
+    description: "Turns ambiguous founder goals into focused market and roadmap decisions.",
+    instruction_prompt:
+      "You are a pragmatic strategist. Ask one clarifying question at most, then recommend a concrete path with tradeoffs.",
+    model_name: "gpt-4.1-mini",
+    temperature: 0.2,
+    max_tokens: 512,
+    is_active: true,
+    short_bio: "Turns ambiguous founder goals into focused market and roadmap decisions.",
+    instruction_profile:
+      "You are a pragmatic strategist. Ask one clarifying question at most, then recommend a concrete path with tradeoffs.",
+    speaking_style: "Clear, structured, high-signal.",
+    color: "blue",
+    status: "active",
+    avatar_seed: "Ava Strategy",
+    created_at: "2026-04-01T08:00:00Z",
+    updated_at: "2026-04-18T08:00:00Z",
+  },
+  {
+    id: "agent-ops",
+    name: "Noah Ops",
+    role: "Operations Lead",
+    description: "Keeps execution realistic and flags dependencies, risks, and bottlenecks.",
+    instruction_prompt:
+      "You are an operations-minded operator. Call out missing resources, sequencing risks, and next actions.",
+    model_name: "gpt-4.1-mini",
+    temperature: 0.2,
+    max_tokens: 512,
+    is_active: true,
+    short_bio: "Keeps execution realistic and flags dependencies, risks, and bottlenecks.",
+    instruction_profile:
+      "You are an operations-minded operator. Call out missing resources, sequencing risks, and next actions.",
+    speaking_style: "Practical, cautious, execution oriented.",
+    color: "slate",
+    status: "active",
+    avatar_seed: "Noah Ops",
+    created_at: "2026-04-01T08:00:00Z",
+    updated_at: "2026-04-18T08:00:00Z",
+  },
+  {
+    id: "agent-growth",
+    name: "Mila Growth",
+    role: "Growth Lead",
+    description: "Identifies acquisition channels, messaging angles, and quick experiments.",
+    instruction_prompt:
+      "You are a growth marketer. Suggest experiments, metrics, and low-cost validation steps.",
+    model_name: "gpt-4.1-mini",
+    temperature: 0.2,
+    max_tokens: 512,
+    is_active: true,
+    short_bio: "Identifies acquisition channels, messaging angles, and quick experiments.",
+    instruction_profile:
+      "You are a growth marketer. Suggest experiments, metrics, and low-cost validation steps.",
+    speaking_style: "Energetic, experimental, data-aware.",
+    color: "cyan",
+    status: "idle",
+    avatar_seed: "Mila Growth",
+    created_at: "2026-04-01T08:00:00Z",
+    updated_at: "2026-04-18T08:00:00Z",
+  },
+  {
+    id: "agent-finance",
+    name: "Leo Finance",
+    role: "Finance Advisor",
+    description: "Protects runway and asks whether a plan actually makes sense on the balance sheet.",
+    instruction_prompt:
+      "You are an analytical finance advisor. Be concise, numeric where possible, and protective of runway.",
+    model_name: "gpt-4.1-mini",
+    temperature: 0.2,
+    max_tokens: 512,
+    is_active: true,
+    short_bio: "Protects runway and asks whether a plan actually makes sense on the balance sheet.",
+    instruction_profile:
+      "You are an analytical finance advisor. Be concise, numeric where possible, and protective of runway.",
+    speaking_style: "Measured, analytical, precise.",
+    color: "emerald",
+    status: "active",
+    avatar_seed: "Leo Finance",
+    created_at: "2026-04-01T08:00:00Z",
+    updated_at: "2026-04-18T08:00:00Z",
+  },
+];
+
+export const seedMeetings: Meeting[] = [
+  {
+    id: "meeting-product-pricing",
+    title: "Pricing reset for MVP launch",
+    problem_statement: "Our current pricing is confusing and may be undercharging for the value we deliver.",
+    objective: "Reach a pricing recommendation we can test next week.",
+    mode: "decision_mode",
+    status: "ended",
+    founder_id: "founder-maya",
+    founder_name: FOUNDER_NAME,
+    participants: [
+      { agent_id: "agent-strategy", agent_name: "Ava Strategy", role: "Strategy Lead", speaking_order: 1 },
+      { agent_id: "agent-growth", agent_name: "Mila Growth", role: "Growth Lead", speaking_order: 2 },
+      { agent_id: "agent-finance", agent_name: "Leo Finance", role: "Finance Advisor", speaking_order: 3 },
+    ],
+    current_speaker_id: null,
+    current_speaker_name: null,
+    transcript_count: 6,
+    summary: {
+      overview: "The team aligned on simplifying pricing, anchoring to customer value, and testing one premium tier.",
+      decision: "Launch a two-tier pricing model with a free trial and one premium paid plan.",
+      rationale: "It balances clarity, conversion, and runway while preserving room for a higher-value upsell.",
+      key_points: [
+        "The current plan is hard to explain in one sentence.",
+        "A clearer value-based structure should improve activation and sales conversations.",
+        "The premium tier should fund support and onboarding cost.",
+      ],
+      action_items: [
+        {
+          id: "ai-1",
+          title: "Draft new pricing page copy",
+          owner: "Maya Chen",
+          priority: "high",
+          due_date: "2026-04-22",
+          status: "open",
+        },
+        {
+          id: "ai-2",
+          title: "Model MRR impact of new tiers",
+          owner: "Leo Finance",
+          priority: "medium",
+          due_date: "2026-04-23",
+          status: "open",
+        },
+      ],
+      updated_at: "2026-04-18T08:30:00Z",
+    },
+    started_at: "2026-04-18T08:00:00Z",
+    ended_at: "2026-04-18T08:30:00Z",
+    created_at: "2026-04-18T07:50:00Z",
+    updated_at: "2026-04-18T08:30:00Z",
+  },
+  {
+    id: "meeting-marketing-handoff",
+    title: "Marketing launch checklist",
+    problem_statement: "We need a clean launch plan for the next feature release and the team is split on scope.",
+    objective: "Decide what goes into the launch checklist and who owns each step.",
+    mode: "round_robin",
+    status: "live",
+    founder_id: "founder-maya",
+    founder_name: FOUNDER_NAME,
+    participants: [
+      { agent_id: "agent-ops", agent_name: "Noah Ops", role: "Operations Lead", speaking_order: 1, is_current_speaker: true },
+      { agent_id: "agent-growth", agent_name: "Mila Growth", role: "Growth Lead", speaking_order: 2 },
+    ],
+    current_speaker_id: "agent-ops",
+    current_speaker_name: "Noah Ops",
+    transcript_count: 4,
+    summary: null,
+    started_at: "2026-04-19T01:00:00Z",
+    ended_at: null,
+    created_at: "2026-04-19T00:40:00Z",
+    updated_at: "2026-04-19T01:06:00Z",
+  },
+];
+
+export const seedMessages: Record<string, Message[]> = {
+  "meeting-product-pricing": [
+    {
+      id: "msg-1",
+      meeting_id: "meeting-product-pricing",
+      sender_kind: "founder",
+      speaker_id: null,
+      speaker_name: FOUNDER_NAME,
+      speaker_role: "Founder",
+      content:
+        "The pricing page feels muddy. I want us to simplify it before launch, but I do not want to undersell the product.",
+      created_at: "2026-04-18T08:01:00Z",
+    },
+    {
+      id: "msg-2",
+      meeting_id: "meeting-product-pricing",
+      sender_kind: "agent",
+      speaker_id: "agent-strategy",
+      speaker_name: "Ava Strategy",
+      speaker_role: "Strategy Lead",
+      content:
+        "We should cut the offer into a clear core plan and a premium support tier. The win is clarity, not discounting. If the founder can explain it in one sentence, sales friction drops immediately.",
+      sections: [
+        {
+          heading: "Recommendation",
+          bullets: ["One primary paid plan", "One premium support add-on", "One-line positioning for the homepage"],
+        },
+      ],
+      created_at: "2026-04-18T08:07:00Z",
+    },
+    {
+      id: "msg-3",
+      meeting_id: "meeting-product-pricing",
+      sender_kind: "agent",
+      speaker_id: "agent-growth",
+      speaker_name: "Mila Growth",
+      speaker_role: "Growth Lead",
+      content:
+        "I would test the new pricing with a landing page experiment and compare sign-up intent against the current version. The metric that matters is activation, not just clicks.",
+      created_at: "2026-04-18T08:12:00Z",
+    },
+    {
+      id: "msg-4",
+      meeting_id: "meeting-product-pricing",
+      sender_kind: "agent",
+      speaker_id: "agent-finance",
+      speaker_name: "Leo Finance",
+      speaker_role: "Finance Advisor",
+      content:
+        "From a runway perspective, we should avoid a low price that forces an unprofitable volume target. A premium plan with onboarding support gives us room to recover acquisition cost.",
+      created_at: "2026-04-18T08:16:00Z",
+    },
+  ],
+  "meeting-marketing-handoff": [
+    {
+      id: "msg-10",
+      meeting_id: "meeting-marketing-handoff",
+      sender_kind: "founder",
+      speaker_id: null,
+      speaker_name: FOUNDER_NAME,
+      speaker_role: "Founder",
+      content: "We need a realistic launch checklist that does not depend on everyone being online at once.",
+      created_at: "2026-04-19T01:02:00Z",
+    },
+    {
+      id: "msg-11",
+      meeting_id: "meeting-marketing-handoff",
+      sender_kind: "agent",
+      speaker_id: "agent-ops",
+      speaker_name: "Noah Ops",
+      speaker_role: "Operations Lead",
+      content: "Start with ownership and sequencing. If we do not assign each step to a single owner, the checklist will collapse into a vague todo list.",
+      created_at: "2026-04-19T01:04:00Z",
+    },
+  ],
+};
