@@ -268,7 +268,8 @@ export function MeetingRoomPage() {
                         description: "The opening statement is in the transcript.",
                         tone: "success",
                       });
-                    } catch {
+                    } catch(error) {
+                      console.error("Failed to send message:", error);  
                       setWaitingForResponse(false);
                       setComposerText(draft);
                       pushToast({

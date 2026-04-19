@@ -139,7 +139,7 @@ function toUiActionItem(item: Record<string, unknown>): MeetingSummaryActionItem
   return {
     id: String(item.id ?? crypto.randomUUID()),
     title: String(item.title ?? item.name ?? "Action item"),
-    owner: String(item.owner ?? "Founder"),
+    owner: String(item.owner_type ?? "Founder"),
     priority: (item.priority as MeetingSummaryActionItem["priority"]) ?? "medium",
     due_date: typeof item.due_date === "string" ? item.due_date : undefined,
     status: (item.status as MeetingSummaryActionItem["status"]) ?? "open",
